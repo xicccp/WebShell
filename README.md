@@ -21,35 +21,10 @@ Shell Parser & Executor
 
 ---
 
-## Project Structure
-
-```
-webshell/
-├── main.c
-├── server/
-│   ├── http.c / http.h
-│   └── socket.c / socket.h
-├── shell/
-│   ├── shell.c / shell.h
-│   └── parser.c / parser.h
-├── kv/
-│   ├── kvstore.c / kvstore.h
-│   └── hashmap.c / hashmap.h
-├── compress/
-│   ├── huffman.c / huffman.h
-│   └── bitio.c / bitio.h
-├── allocator/
-│   ├── allocator.c / allocator.h
-└── frontend/
-    └── index.html
-```
-
----
-
 ## Modules
 
 ### Custom Memory Allocator
-A `malloc`/`free` implementation built from scratch using a free-list strategy with block coalescing. Used internally by the KV store and compressor instead of the standard library.
+A `malloc`/`free` implementation built from scratch using a free-bin strategy with block coalescing. Used internally by the KV store and compressor instead of the standard library.
 
 ### HTTP Server
 A single-threaded TCP server that parses raw HTTP requests, serves the frontend UI, and streams shell output back to the browser via chunked transfer encoding.
@@ -80,12 +55,12 @@ decompress file.txt.huf  # restores original
 ## Development Checklist
 
 ### Phase 1 — Custom Memory Allocator
-- [ ] Define memory pool / heap structure
-- [ ] Implement `my_malloc()` using free-list
-- [ ] Implement `my_free()` with block coalescing
-- [ ] Implement `my_realloc()`
-- [ ] Write test suite (alloc, free, fragmentation tests)
-- [ ] Benchmark against standard `malloc`
+- [X] Define memory pool / heap structure
+- [X] Implement `my_malloc()` using free-list
+- [X] Implement `my_free()` with block coalescing
+- [X] Implement `my_realloc()`
+- [X] Write test suite (alloc, free, fragmentation tests)
+- [X] Benchmark against standard `malloc`
 
 ### Phase 2 — HTTP Server
 - [ ] Create TCP socket, bind, listen, accept loop

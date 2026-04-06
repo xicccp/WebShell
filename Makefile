@@ -1,9 +1,15 @@
 CC      = gcc
 CFLAGS  = -Wall -Wextra -g
 
-SRC     = main.c \
-          tests/allocator_test.c \
-          allocator/allocator.c
+SRC     = main.c                          \
+          tests/allocator_test.c           \
+          allocator/allocator.c            \
+          benchmarks/benchmark_menu.c      \
+          benchmarks/bench_allocator.c     \
+          benchmarks/bench_http.c          \
+          benchmarks/bench_shell.c         \
+          benchmarks/bench_kv.c            \
+          benchmarks/bench_compressor.c
 
 OBJ     = $(SRC:.c=.o)
 TARGET  = webshell
@@ -18,4 +24,5 @@ $(TARGET): $(OBJ)
 
 clean:
 	rm -f $(OBJ) $(TARGET)
+
 .PHONY: all clean
