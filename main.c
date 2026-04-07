@@ -131,14 +131,37 @@ static void run_tests_menu() {
 
 static void start_server() {
     clear_screen();
-    printf("\n" CYAN BOLD "  Starting WebShell Server...\n\n" RESET);
+    
+    // ─── ASCII Art Banner ─────────────────────────────────────────────────────
+    printf("\n" CYAN BOLD);
+    printf("  ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗ \n");
+    printf("  ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗\n");
+    printf("  ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝\n");
+    printf("  ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗\n");
+    printf("  ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║\n");
+    printf("  ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝\n");
+    printf(RESET);
+    printf("\n");
+
+    // ─── Waving Cat ASCII Art ──────────────────────────────────────────────────
+    printf("  " CYAN BOLD "  Welcome, traveler!\n");
+    printf("  " DIM  "  The server is rising... prepare to meet your heavenly feline overlord bestowed with the power of the C17 standard mandate\n");
+    printf("  " RESET);
+    printf(GREEN);
+    printf("   /\\_/\\\n");
+    printf("    ( o.o )  ～ 你好\n");
+    printf("     > ^ <   ～\n");
+    printf("    /|   |\\  ～\n");
+    printf("   (_|   |_)\n");
+    printf(RESET);
+    printf("\n");
 
     init_heap();
     g_router = router_create();
     router_register(g_router, "GET", "/shell",      shell_handler);
     router_register(g_router, "GET", "/kv",         kv_handler);
     router_register(g_router, "GET", "/compress",   compressor_handler);
-    router_register(g_router, "GET", "/",           static_handler); // ← always last
+    router_register(g_router, "GET", "/",           static_handler); // always last
 
     printf("  " GREEN "[✓]" RESET " Router initialized — %zu routes registered\n", g_router->count);
 
