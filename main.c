@@ -3,6 +3,9 @@
 #include <string.h>
 #include "tests/allocator_test.h"
 #include "benchmarks/benchmark_menu.h"
+#include "allocator/allocator.h"
+#include "server/socket.h"
+#include "server/router.h"
 
 // ─── ANSI Colors ─────────────────────────────────────────────────────────────
 #define RESET       "\033[0m"
@@ -44,7 +47,7 @@ static void print_phase_status() {
     printf("\n");
     printf("  " BOLD WHITE "PROJECT PHASES\n\n" RESET);
     printf("  " GREEN  "[✓]" RESET " Phase 1  —  Custom Memory Allocator\n");
-    printf("  " YELLOW "[…]" RESET " Phase 2  —  HTTP Server\n");
+    printf("  " GREEN  "[✓]" RESET " Phase 2  —  HTTP Server\n");
     printf("  " YELLOW "[…]" RESET " Phase 3  —  Shell Engine\n");
     printf("  " YELLOW "[…]" RESET " Phase 4  —  Key-Value Store\n");
     printf("  " YELLOW "[…]" RESET " Phase 5  —  File Compressor\n");
@@ -59,6 +62,7 @@ static void print_menu() {
     printf("  " BOLD WHITE "MAIN MENU\n\n" RESET);
     printf("  " CYAN  "[1]" RESET "  Module Tests             " GREEN  "← run per-phase test suites\n"  RESET);
     printf("  " CYAN  "[2]" RESET "  Benchmarks               " GREEN  "← performance vs system libs\n" RESET);
+    printf("  " CYAN  "[3]" RESET "  Start HTTP Server        " GREEN  "← Phase 2\n" RESET);
     printf("\n");
     printf("  " CYAN  "[s]" RESET "  Show Phase Status\n");
     printf("  " MAGENTA "[q]" RESET "  Quit\n");
@@ -92,7 +96,7 @@ static void print_tests_menu() {
     divider();
     printf("\n  " BOLD WHITE "SELECT PHASE\n\n" RESET);
     printf("  " CYAN  "[1]" RESET "  Allocator Tests          " GREEN  "← Phase 1 complete\n" RESET);
-    printf("  " DIM   "[2]" RESET DIM "  HTTP Server Tests        " YELLOW "← Phase 2\n" RESET);
+    printf("  " CYAN  "[2]" RESET "  HTTP Server Tests        " YELLOW "← coming soon\n" RESET);
     printf("  " DIM   "[3]" RESET DIM "  Shell Engine Tests       " YELLOW "← Phase 3\n" RESET);
     printf("  " DIM   "[4]" RESET DIM "  KV Store Tests           " YELLOW "← Phase 4\n" RESET);
     printf("  " DIM   "[5]" RESET DIM "  Compressor Tests         " YELLOW "← Phase 5\n" RESET);
@@ -123,6 +127,32 @@ static void run_tests_menu() {
     }
 }
 
+// ─── Server Initialization ───────────────────────────────────────────────────
+
+static void start_server() {
+    clear_screen();
+    printf("\n" CYAN BOLD "  Starting WebShell Server...\n\n" RESET);
+
+    init_heap();
+    g_router = router_create();
+    router_register(g_router, "GET", "/shell",      shell_handler);
+    router_register(g_router, "GET", "/kv",         kv_handler);
+    router_register(g_router, "GET", "/compress",   compressor_handler);
+    router_register(g_router, "GET", "/",           static_handler); // ← always last
+
+    printf("  " GREEN "[✓]" RESET " Router initialized — %zu routes registered\n", g_router->count);
+
+    int server_fd = create_server_socket(8080);
+    printf("  " GREEN "[✓]" RESET " Listening on " CYAN "http://localhost:8080\n" RESET);
+    printf("  " DIM   "  Press Ctrl+C to stop the server\n\n" RESET);
+
+    start_accept_loop(server_fd);
+
+    // only reached on shutdown
+    close_server_socket(server_fd);
+    router_free(g_router);
+}
+
 // ─── Entry Point ─────────────────────────────────────────────────────────────
 int main() {
     char choice;
@@ -138,6 +168,9 @@ int main() {
                 break;
             case '2':
                 run_benchmark_menu();
+                break;
+            case '3':
+                start_server();
                 break;
             case 's': case 'S':
                 clear_screen();
