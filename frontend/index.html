@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebShell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel = "stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Navbar ──────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-logo">WEB<span>SHELL</span></div>
+    <ul class="nav-links">
+      <li><a href="#terminal">Terminal</a></li>
+      <li><a href="#kvstore">KV Store</a></li>
+      <li><a href="#compressor">Compressor</a></li>
+      <li><a href="#stats">Stats</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      SERVER ONLINE
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <div id="hero">
+    <div class="hero-eyebrow">// built from scratch in C</div>
+    <h1 class="hero-title" data-text="WEBSHELL">WEBSHELL</h1>
+    <p class="hero-sub">
+      A browser-accessible Unix shell with a custom <em>memory allocator</em>,
+      <em>HTTP server</em>, <em>KV store</em> &amp; <em>file compressor</em>
+    </p>
+
+    <div class="hero-tags">
+      <span class="tag">C / C++</span>
+      <span class="tag">TCP Sockets</span>
+      <span class="tag">Huffman Encoding</span>
+      <span class="tag">Free-Bin Allocator</span>
+      <span class="tag">Hash Maps</span>
+      <span class="tag">fork / exec</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#terminal" class="btn btn-primary">Launch Terminal</a>
+      <a href="https://github.com/xicccp/WebShell" class="btn btn-ghost">View Source</a>
+    </div>
+
+    <div class="boot-sequence">
+      <div class="boot-line"><span class="boot-ok">[  OK  ]</span><span>Loaded custom memory allocator (1MB heap)</span></div>
+      <div class="boot-line"><span class="boot-ok">[  OK  ]</span><span>HTTP server bound to port 8080</span></div>
+      <div class="boot-line"><span class="boot-ok">[  OK  ]</span><span>Router initialized — 5 routes registered</span></div>
+      <div class="boot-line"><span class="boot-warn">[ WAIT ]</span><span>Shell engine — awaiting Phase 3</span></div>
+      <div class="boot-line"><span class="boot-warn">[ WAIT ]</span><span>KV store — awaiting Phase 4</span></div>
+      <div class="boot-line"><span class="boot-warn">[ WAIT ]</span><span>Compressor — awaiting Phase 5</span></div>
+    </div>
+  </div>
+
+  <!-- ── Terminal ─────────────────────────────────────────────── -->
+  <section id="terminal">
+    <div class="section-label">// phase 3</div>
+    <h2 class="section-title">TERMINAL <span class="coming-soon-badge">Phase 3</span></h2>
+    <p class="section-desc">Execute shell commands directly from your browser. Output streams in real time via chunked HTTP transfer.</p>
+    <div class="section-divider"></div>
+
+    <div class="terminal-window">
+      <div class="terminal-titlebar">
+        <div class="tbar-dot red"></div>
+        <div class="tbar-dot yellow"></div>
+        <div class="tbar-dot green"></div>
+        <span class="tbar-title">webshell — bash</span>
+      </div>
+      <div class="terminal-output" id="terminal-output">
+        <div class="t-line"><span class="t-info">WebShell v0.1.0 — HTTP Server online</span></div>
+        <div class="t-line"><span class="t-info">Shell engine not yet connected. Coming in Phase 3.</span></div>
+        <div class="t-line"><span class="t-info">────────────────────────────────────────────────</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> echo "The mandate of heaven finds its way"</span></div>
+        <div class="t-out">The mandate of heaven finds its way</div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> ls -la</span></div>
+        <div class="t-err">shell: command execution not yet wired — Phase 3</div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="t-input-prompt">$</span>
+        <input id="shell-input" type="text" placeholder="enter command..." autocomplete="off" disabled />
+        <div class="t-cursor"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KV Store ──────────────────────────────────────────────── -->
+  <section id="kvstore">
+    <div class="section-label">// phase 4</div>
+    <h2 class="section-title">KV STORE <span class="coming-soon-badge">Phase 4</span></h2>
+    <p class="section-desc">In-memory key-value store backed by a custom hash map. Persists to disk on shutdown and reloads on startup.</p>
+    <div class="section-divider"></div>
+
+    <div class="kv-grid">
+      <div class="panel">
+        <div class="panel-title">Operations</div>
+        <div class="kv-form">
+          <div class="kv-input-row">
+            <input class="kv-input" placeholder="key" disabled />
+            <input class="kv-input" placeholder="value" disabled />
+            <button class="kv-btn">SET</button>
+          </div>
+          <div class="kv-input-row">
+            <input class="kv-input" placeholder="key" disabled />
+            <button class="kv-btn">GET</button>
+            <button class="kv-btn">DEL</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Current Entries</div>
+        <table class="kv-table">
+          <thead>
+            <tr><th>Key</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="2" class="kv-empty">No entries yet, Phase 4 will wire this up</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Compressor ────────────────────────────────────────────── -->
+  <section id="compressor">
+    <div class="section-label">// phase 5</div>
+    <h2 class="section-title">COMPRESSOR <span class="coming-soon-badge">Phase 5</span></h2>
+    <p class="section-desc">Huffman encoding compression and decompression. Tree nodes allocated via the custom memory allocator.</p>
+    <div class="section-divider"></div>
+
+    <div class="compress-grid">
+      <div class="panel">
+        <div class="panel-title">Upload File</div>
+        <div class="drop-zone">
+          <div class="drop-zone-icon">⬆</div>
+          <div class="drop-zone-text">Drop file here or click to upload<br><br>Compression engine not yet connected<br>Coming in Phase 5</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Compression Stats</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value">—</div>
+            <div class="stat-label">Original</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">—</div>
+            <div class="stat-label">Compressed</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">—</div>
+            <div class="stat-label">Ratio</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">—</div>
+            <div class="stat-label">Speed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── System Stats ───────────────────────────────────────────── -->
+  <section id="stats">
+    <div class="section-label">// allocator · server</div>
+    <h2 class="section-title">SYSTEM STATS</h2>
+    <p class="section-desc">Live memory allocator usage, server uptime, and request metrics served directly from the C backend.</p>
+    <div class="section-divider"></div>
+
+    <div class="panel">
+      <div class="panel-title">Heap Utilization</div>
+      <div class="mem-bar-container">
+        <div class="mem-bar" id="mem-bar" style="width: 3%"></div>
+        <div class="mem-bar-label">3% used — 1,019 KB free</div>
+      </div>
+    </div>
+
+    <div class="stats-cards">
+      <div class="stat-card">
+        <div class="stat-card-value" id="stat-uptime">00:00</div>
+        <div class="stat-card-label">Uptime</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value" id="stat-requests">1</div>
+        <div class="stat-card-label">Requests Served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value">1 MB</div>
+        <div class="stat-card-label">Heap Size</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value">5</div>
+        <div class="stat-card-label">Routes Registered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value" id="stat-blocks">—</div>
+        <div class="stat-card-label">Heap Blocks</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value">8080</div>
+        <div class="stat-card-label">Port</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer>
+    built from scratch in C &nbsp;·&nbsp;
+    <span>WebShell</span> &nbsp;·&nbsp;
+    allocator · http · shell · kv · compressor
+  </footer>
+
+  <script>
+    // ── Uptime counter ──────────────────────────────────────────
+    const start = Date.now();
+    setInterval(() => {
+      const s = Math.floor((Date.now() - start) / 1000);
+      const m = Math.floor(s / 60);
+      const h = Math.floor(m / 60);
+      document.getElementById('stat-uptime').textContent =
+        h > 0
+          ? `${String(h).padStart(2,'0')}:${String(m%60).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`
+          : `${String(m).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+    }, 1000);
+
+    // ── Request counter ─────────────────────────────────────────
+    let reqs = 1;
+    setInterval(() => {
+      // will be replaced with real /stats endpoint in Phase 6
+      document.getElementById('stat-requests').textContent = reqs++;
+    }, 8000);
+
+    // ── Terminal input (stub) ───────────────────────────────────
+    document.getElementById('shell-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const out = document.getElementById('terminal-output');
+        const val = e.target.value.trim();
+        if (!val) return;
+        const line = document.createElement('div');
+        line.className = 't-line';
+        line.innerHTML = `<span class="t-prompt">$</span><span class="t-cmd"> ${val}</span>`;
+        out.appendChild(line);
+        const err = document.createElement('div');
+        err.className = 't-err';
+        err.textContent = 'shell: not connected — wiring up in Phase 3';
+        out.appendChild(err);
+        out.scrollTop = out.scrollHeight;
+        e.target.value = '';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -4,6 +4,9 @@ CFLAGS  = -Wall -Wextra -g
 SRC     = main.c                          \
           tests/allocator_test.c           \
           allocator/allocator.c            \
+          server/http.c                    \
+          server/router.c                  \
+          server/socket.c                  \
           benchmarks/benchmark_menu.c      \
           benchmarks/bench_allocator.c     \
           benchmarks/bench_http.c          \
