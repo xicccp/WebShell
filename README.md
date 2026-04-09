@@ -63,12 +63,12 @@ decompress file.txt.huf  # restores original
 - [X] Benchmark against standard `malloc`
 
 ### Phase 2 — HTTP Server
-- [ ] Create TCP socket, bind, listen, accept loop
-- [ ] Parse raw HTTP GET requests
-- [ ] Serve static files (HTML/CSS/JS)
-- [ ] Handle basic HTTP responses (200, 404, 500)
-- [ ] Stream chunked responses (needed for shell output)
-- [ ] Test in browser — "Hello World" page loads
+- [X] Create TCP socket, bind, listen, accept loop
+- [X] Parse raw HTTP GET requests
+- [X] Serve static files (HTML/CSS/JS)
+- [X] Handle basic HTTP responses (200, 404, 500)
+- [X] Stream chunked responses (needed for shell output)
+- [X] Test in browser — "Hello World" page loads
 
 ### Phase 3 — Shell Engine
 - [ ] Input parser (tokenizer, handle quotes/spaces)
